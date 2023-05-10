@@ -1,7 +1,7 @@
 package com.portfolio.jms.Controller;
 
 import com.portfolio.jms.Security.Controller.Mensaje;
-import com.portfolio.jms.Security.Dto.dtoExperience;
+import com.portfolio.jms.Dto.dtoExperience;
 import com.portfolio.jms.Entity.Experience;
 import com.portfolio.jms.Service.ImpExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
