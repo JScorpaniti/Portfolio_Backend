@@ -1,9 +1,9 @@
 package com.portfolio.jms.Security.jwt;
 
-import com.sun.org.slf4j.internal.Logger;
+import org.slf4j.Logger;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

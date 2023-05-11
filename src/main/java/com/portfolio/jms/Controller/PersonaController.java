@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.portfolio.jms.Interface.IPersonaService;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,18 +28,25 @@ public class PersonaController {
         return ipersonaService.getPersona();
     }
     
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/personas/crear")
     public String createPersona(@RequestBody Persona persona) {
         ipersonaService.savePersona(persona);
         return "Creado correctamente";
     }
     
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/personas/borrar/{id}")
     public String deletePersona(@PathVariable Long id){
         ipersonaService.deletePersona(id);
         return "Eliminado correctamente";
     }
     
+    
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/personas/editar/{id}")
     public Persona editPerona(@PathVariable Long id,
                               @RequestParam("name") String newName,

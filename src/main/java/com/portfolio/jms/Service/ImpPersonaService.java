@@ -45,17 +45,17 @@ public class ImpPersonaService implements IPersonaService{
 
     @Override
     public List<Persona> getPersona() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ipersonaRepository.findAll();
     }
 
     @Override
     public void savePersona(Persona persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ipersonaRepository.save(persona);
     }
 
     @Override
     public void deletePersona(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ipersonaRepository.deleteById(id);
     }
 
     @Override

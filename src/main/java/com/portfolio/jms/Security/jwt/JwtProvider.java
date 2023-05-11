@@ -37,21 +37,25 @@ public class JwtProvider{
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
     
-    public boolean validateToken(String token){
-        try{
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            return true;
-        }catch (MalformedJwtException e){
-            logger.error("Token mal formado");
-        }catch (UnsupportedJwtException e){
-            logger.error("Token no soportado");
-        }catch (ExpiredJwtException e){
-            logger.error("Token expirado");
-        }catch (IllegalArgumentException e){
-            logger.error("Token vacio");
-        }catch (SignatureException e){
-            logger.error("Firma no válida");
-        }
-        return false;
+    public boolean validateToken(String token) {
+    try {
+        Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+        return true;
+    } catch (MalformedJwtException e) {
+        logger.error("Token mal formado");
+        throw new IllegalArgumentException("Token mal formado", e);
+    } catch (UnsupportedJwtException e) {
+        logger.error("Token no soportado");
+        throw new IllegalArgumentException("Token no soportado", e);
+    } catch (ExpiredJwtException e) {
+        logger.error("Token expirado");
+        throw new IllegalArgumentException("Token expirado", e);
+    } catch (IllegalArgumentException e) {
+        logger.error("Token vacio");
+        throw new IllegalArgumentException("Token vacio", e);
+    } catch (SignatureException e) {
+        logger.error("Firma no válida");
+        throw new IllegalArgumentException("Firma no válida", e);
     }
-}
+    }
+} 
