@@ -2,8 +2,8 @@ package com.portfolio.jms.Security.jwt;
 
 import com.portfolio.jms.Security.Service.UserDetailsImplements;
 import java.io.IOException;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

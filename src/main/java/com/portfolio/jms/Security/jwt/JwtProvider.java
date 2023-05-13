@@ -1,8 +1,8 @@
  package com.portfolio.jms.Security.jwt;
 
 import com.portfolio.jms.Security.Entity.UsuarioPrincipal;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
