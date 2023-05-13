@@ -33,6 +33,14 @@ public class ExperienceController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Experience> getById(@PathVariable("id") int id){
+        if(!impExperienceService.existsById(id))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        Experience experience = impExperienceService.getOne(id).get();
+        return new ResponseEntity(experience, HttpStatus.OK);
+    }
+    
     @PostMapping("/nueva")
     public ResponseEntity<?> create(@RequestBody dtoExperience dtoExp){
         if (StringUtils.isBlank(dtoExp.getEmpresa())) 
