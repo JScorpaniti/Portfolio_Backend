@@ -17,12 +17,12 @@ import com.portfolio.jms.Interface.IPersonaService;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
-@CrossOrigin(origins = "https://portfoliojms-f30a1.web.app/")
+@CrossOrigin(origins = "https://portfoliojms-f30a1.web.app")
 public class PersonaController {
     
     @Autowired 
     IPersonaService ipersonaService;
-    
+
     @GetMapping("/personas/traer")
     public List<Persona> getPersona() {
         return ipersonaService.getPersona();

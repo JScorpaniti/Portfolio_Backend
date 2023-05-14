@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"https://portfoliojms-f30a1.web.app/"})
+@CrossOrigin(origins = {"https://portfoliojms-f30a1.web.app"})
 public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -57,7 +57,7 @@ public class AuthController {
          if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("El email ya existe"), HttpStatus.BAD_REQUEST);
          
-         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
+         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), nuevoUsuario.getPassword()// passwordEncoder.encode(nuevoUsuario.getPassword());
     
          Set<Rol> roles = new HashSet<>();
          roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
@@ -72,22 +72,29 @@ public class AuthController {
     
     
     @PostMapping("/login")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Campos incorrectos"), HttpStatus.BAD_REQUEST);
-        
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginUsuario.getNombreUsuario(),
-                loginUsuario.getPassword()));
-        
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        String jwt = jwtProvider.generateToken(authentication);
-        
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        
-        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-        
-        return new ResponseEntity(jwtDto, HttpStatus.OK);
+public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+        return new ResponseEntity<>(new Mensaje("Campos incorrectos"), HttpStatus.BAD_REQUEST);
     }
+
+    Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                    loginUsuario.getNombreUsuario(),
+                    loginUsuario.getPassword()
+            )
+    );
+
+    SecurityContext securityContext = SecurityContextHolder.getContext();
+    securityContext.setAuthentication(authentication);
+
+    String jwt = jwtProvider.generateToken(authentication);
+
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+    JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+
+    return new ResponseEntity<>(jwtDto, HttpStatus.OK);
+}
+
+
 }
