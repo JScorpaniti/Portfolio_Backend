@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.portfolio.jms.JmsApplicationTests
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.951 s - in com.portfolio.jms.JmsApplicationTests
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.22 s - in com.portfolio.jms.JmsApplicationTests
->>>>>>> e58073951439590bd9019c9f1f6c00bef434ad9e
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.406 s - in com.portfolio.jms.JmsApplicationTests
