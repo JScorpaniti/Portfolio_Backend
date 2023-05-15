@@ -32,10 +32,10 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
         return new JwtTokenFilter();
     }
     
-   // @Bean
-   // public PasswordEncoder passwordEncoder(){
-    //    return new BCryptPasswordEncoder();
-    //}
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
