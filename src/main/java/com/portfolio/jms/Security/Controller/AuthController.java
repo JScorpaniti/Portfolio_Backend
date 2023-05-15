@@ -28,11 +28,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"https://portfoliojms-f30a1.web.app/"})
+@CrossOrigin(origins = {"https://portfoliojms-f30a1.web.app"})
 public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -57,7 +60,7 @@ public class AuthController {
          if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("El email ya existe"), HttpStatus.BAD_REQUEST);
          
-         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
+         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), nuevoUsuario.getPassword());// passwordEncoder.encode(nuevoUsuario.getPassword());
     
          Set<Rol> roles = new HashSet<>();
          roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
@@ -71,23 +74,51 @@ public class AuthController {
     }
     
     
-    @PostMapping("/login")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Campos incorrectos"), HttpStatus.BAD_REQUEST);
-        
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginUsuario.getNombreUsuario(),
-                loginUsuario.getPassword()));
-        
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        String jwt = jwtProvider.generateToken(authentication);
-        
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        
-        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-        
-        return new ResponseEntity(jwtDto, HttpStatus.OK);
+//    @PostMapping("/login")
+//public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+//    if (bindingResult.hasErrors()) {
+//        return new ResponseEntity<>(new Mensaje("Campos incorrectos"), HttpStatus.BAD_REQUEST);
+ //   }
+
+  //  Authentication authentication = authenticationManager.authenticate(
+   //         new UsernamePasswordAuthenticationToken(
+     //               loginUsuario.getNombreUsuario(),
+        //            loginUsuario.getPassword()
+       //   )
+   // );
+
+    //SecurityContext securityContext = SecurityContextHolder.getContext();
+    //securityContext.setAuthentication(authentication);
+
+    //String jwt = jwtProvider.generateToken(authentication);
+
+    //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+    //JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+
+    //return new ResponseEntity<>(jwtDto, HttpStatus.OK);
+//}
+@PostMapping("/login")
+public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+        return new ResponseEntity<>(new JwtDto("", "", new ArrayList<>()), HttpStatus.BAD_REQUEST);
     }
+
+    Usuario usuario = usuarioService.getByNombreUsuario(loginUsuario.getNombreUsuario())
+            .orElseThrow(() -> new RuntimeException("Nombre de usuario no encontrado"));
+
+    if (!loginUsuario.getPassword().equals(usuario.getPassword())) {
+        return new ResponseEntity<>(new JwtDto("", "", new ArrayList<>()), HttpStatus.UNAUTHORIZED);
+    }
+
+    Authentication authentication = new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword());
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    String jwt = jwtProvider.generateToken(authentication);
+
+    JwtDto jwtDto = new JwtDto(jwt, loginUsuario.getNombreUsuario(), new ArrayList<>());
+
+    return new ResponseEntity<>(jwtDto, HttpStatus.OK);
 }
+}
+
