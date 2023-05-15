@@ -29,7 +29,7 @@ public class PersonaController {
     }
     
     
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/personas/crear")
     public String createPersona(@RequestBody Persona persona) {
         ipersonaService.savePersona(persona);
@@ -37,7 +37,7 @@ public class PersonaController {
     }
     
     
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/personas/borrar/{id}")
     public String deletePersona(@PathVariable Long id){
         ipersonaService.deletePersona(id);
@@ -46,18 +46,20 @@ public class PersonaController {
     
     
     
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/personas/editar/{id}")
     public Persona editPerona(@PathVariable Long id,
                               @RequestParam("name") String newName,
                               @RequestParam("lastname") String newLastname,
                               @RequestParam("description") String newDescription,
+                              @RequestParam("titulo") String newTitulo,
                               @RequestParam("img") String newImg){
         Persona persona = ipersonaService.findPersona(id);
         
         persona.setName(newName);
         persona.setLastname(newLastname);
         persona.setDescription(newDescription);
+        persona.setTitulo(newTitulo);
         persona.setImg(newImg);
         
         ipersonaService.savePersona(persona);

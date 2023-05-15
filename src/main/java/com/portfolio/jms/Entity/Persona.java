@@ -28,6 +28,10 @@ public class Persona {
     private String description;
             
     @NotNull
+    @Size (min =5, max = 100, message = "Campo invalido, entre 5 y 100 caracteres maximo")
+    private String titulo;
+
+
     @Size(min = 3, max = 50, message = "Campo invalido")
     private String img;
     
