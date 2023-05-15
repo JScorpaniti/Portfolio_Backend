@@ -8,9 +8,7 @@ E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Interface\IPersonaSe
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Service\ImpEducationService.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Entity\Education.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Dto\dtoEducation.java
-E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\Dto\LoginUsuario.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Entity\Persona.java
-E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\Dto\JwtDto.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\jwt\JwtTokenFilter.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Controller\ExperienceController.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\Enums\RolNombre.java
@@ -35,7 +33,6 @@ E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\Entity\Rol.
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Repository\IPersonaRepository.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\Service\UserDetailsImplements.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Entity\Skills.java
-E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Security\Dto\NuevoUsuario.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Service\ImpSkillsService.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\JmsApplication.java
 E:\Arg programa\Backend\jms\src\main\java\com\portfolio\jms\Controller\SkillsController.java

@@ -90,3 +90,5 @@ public class EducationController {
         return new ResponseEntity(new Mensaje("Educacion eliminada corrrectamente"), HttpStatus.OK);
     }
  }
+   
+  

@@ -22,7 +22,7 @@ public class PersonaController {
     
     @Autowired 
     IPersonaService ipersonaService;
-    
+
     @GetMapping("/personas/traer")
     public List<Persona> getPersona() {
         return ipersonaService.getPersona();
