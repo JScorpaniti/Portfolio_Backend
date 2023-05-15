@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/skills")
-@CrossOrigin(origins = "https://portfoliojms-f30a1.web.app/")
+@CrossOrigin(origins = "https://portfoliojms-f30a1.web.app")
 public class SkillsController {
     @Autowired
     ImpSkillsService impskillsService;
