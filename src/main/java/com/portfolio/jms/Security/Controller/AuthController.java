@@ -35,6 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "https://portfoliojms-f30a1.firebaseapp.com")
 public class AuthController {
     @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
     UsuarioService usuarioService;
