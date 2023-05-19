@@ -47,7 +47,7 @@ public class PersonaController {
     
     
     //@PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/personas/editar/{id}")
+    @PutMapping("/personas/editar")
     public Persona editPerona(@PathVariable Long id,
                               @RequestParam("name") String newName,
                               @RequestParam("lastname") String newLastname,
@@ -70,4 +70,5 @@ public class PersonaController {
     public Persona findPersona() {
         return ipersonaService.findPersona((long)1);
     }
+
 }
