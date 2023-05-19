@@ -48,13 +48,12 @@ public class PersonaController {
     
     //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/personas/editar")
-    public Persona editPerona(@PathVariable Long id,
-                              @RequestParam("name") String newName,
+    public Persona editPerona(@RequestParam("name") String newName,
                               @RequestParam("lastname") String newLastname,
                               @RequestParam("description") String newDescription,
                               @RequestParam("titulo") String newTitulo,
                               @RequestParam("img") String newImg){
-        Persona persona = ipersonaService.findPersona(id);
+        Persona persona = ipersonaService.findPersona();
         
         persona.setName(newName);
         persona.setLastname(newLastname);
@@ -64,11 +63,6 @@ public class PersonaController {
         
         ipersonaService.savePersona(persona);
         return persona;
-    }
-    
-    @GetMapping("/personas/traer/perfil")
-    public Persona findPersona() {
-        return ipersonaService.findPersona((long)1);
     }
 
 }

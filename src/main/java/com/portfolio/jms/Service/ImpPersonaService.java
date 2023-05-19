@@ -59,7 +59,12 @@ public class ImpPersonaService implements IPersonaService{
     }
 
     @Override
-    public Persona findPersona(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Persona findPersona() {
+        List<Persona> personas = ipersonaRepository.findAll();
+        if (!personas.isEmpty()) {
+             return personas.get(0);
+        } else {
+                return null;
+        }
     }
 }
